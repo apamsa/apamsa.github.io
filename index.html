@@ -3,271 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>APAMSA Poster Judging</title>
+<title>Research @ APAMSA — Poster Judging</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-:root{--red:#A32D2D;--red-l:#FCEBEB;--red-d:#501313;--red-b:#F09595;--yellow:#BA7517;--yellow-l:#FAEEDA;--yellow-d:#412402;--yellow-b:#EF9F27;--orange:#C8501A;--orange-l:#FAECE7;--orange-d:#4A1B0C;--orange-b:#F0997B;--green:#3B6D11;--green-l:#EAF3DE;--green-d:#173404;--green-b:#97C459;--blue:#185FA5;--blue-l:#E6F1FB;--blue-d:#042C53;--blue-b:#85B7EB;--g50:#fafafa;--g100:#f4f4f4;--g200:#e8e8e8;--g500:#888;--g700:#444;--g900:#111;--radius:10px;--radius-lg:16px;--fd:'DM Serif Display',serif;--fb:'DM Sans',sans-serif}
+:root{
+  --ink:#1a1a1a;--ink2:#555;--ink3:#999;
+  --navy:#1B2C6B;
+  --surface:#fff;--surface2:#f8f7f5;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);
+  --radius:10px;
+  --fd:'DM Serif Display',Georgia,serif;
+  --fb:'DM Sans',system-ui,sans-serif;
+  --accent:#1a1a1a;--accent-l:#f5f5f5;--accent-d:#000;--accent-b:#ccc;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--fb);background:#fff;color:var(--g900);min-height:100vh}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid var(--g200);position:sticky;top:0;background:#fff;z-index:100}
-.nav-logo{font-family:var(--fd);font-size:1.2rem}.nav-logo span{color:var(--red)}
-.nav-tabs{display:flex;gap:4px}
-.nav-tab{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--g500);transition:all .15s}
-.nav-tab:hover{background:var(--g100);color:var(--g900)}.nav-tab.active{background:var(--g900);color:#fff}
-.page{display:none}.page.active{display:block}
-.hero{text-align:center;padding:4rem 2rem 3rem;border-bottom:1px solid var(--g200)}
-.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:1rem}
-.hero h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin-bottom:1rem}
-.hero h1 em{font-style:normal;color:var(--red)}
-.hero p{font-size:15px;color:var(--g500);max-width:480px;margin:0 auto 2rem;line-height:1.7}
-.hero-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2.5rem}
-.cat-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
-.dot{width:7px;height:7px;border-radius:50%}
-.btn-start{display:inline-block;padding:12px 32px;background:var(--g900);color:#fff;border-radius:var(--radius);font-size:15px;font-weight:500;cursor:pointer;border:none;transition:background .15s,transform .1s}
-.btn-start:hover{background:#222}.btn-start:active{transform:scale(.98)}
-#form-page{max-width:600px;margin:0 auto;padding:0 1.5rem 4rem}
-.progress-wrap{height:3px;background:var(--g200);position:sticky;top:57px;z-index:50}
-.progress-fill{height:100%;transition:width .4s cubic-bezier(.4,0,.2,1)}
-.form-screen{display:none;padding:2.5rem 0 1.5rem;animation:fadeUp .3s ease;min-height:500px;flex-direction:column}
-.form-screen.active{display:flex}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.step-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
-.step-dot{width:6px;height:6px;border-radius:50%}
-.q-title{font-family:var(--fd);font-size:1.6rem;line-height:1.3;margin-bottom:.4rem}
-.q-sub{font-size:13px;color:var(--g500);margin-bottom:1.5rem;line-height:1.6}
-.score-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
-.score-opt{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1px solid var(--g200);border-radius:var(--radius);cursor:pointer;transition:border-color .15s,background .15s;background:#fff}
-.score-opt:hover{background:var(--g50)}
-.score-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;background:var(--g100);color:var(--g700);transition:background .15s,color .15s}
-.score-opt.sel .score-circle{color:#fff}
-.score-content{flex:1}
-.score-lbl{font-size:12px;font-weight:500;color:var(--g500);margin-bottom:2px}
-.score-dsc{font-size:12px;color:#999;line-height:1.45}
-.score-opt.sel .score-dsc{color:var(--g700)}
-.field-group{margin-bottom:1rem}
-.field-group label{display:block;font-size:12px;font-weight:500;color:var(--g500);margin-bottom:5px}
-.field-group input,.field-group textarea{width:100%;padding:10px 13px;font-size:14px;font-family:var(--fb);border:1px solid var(--g200);border-radius:var(--radius);color:var(--g900);background:#fff;transition:border-color .15s}
-.field-group input:focus,.field-group textarea:focus{outline:none}
-.field-group textarea{resize:vertical;min-height:80px}
-.url-banner{background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius);padding:14px 16px;margin-bottom:1.5rem}
-.url-banner-title{font-size:12px;font-weight:500;color:var(--g700);margin-bottom:6px}
-.url-banner-sub{font-size:11px;color:var(--g500);line-height:1.6;margin-bottom:10px}
-.url-connected{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:500}
-.url-dot-live{width:7px;height:7px;border-radius:50%;background:var(--green)}
-.nav-btns{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--g200)}
-.btn-back{padding:9px 20px;border:1px solid var(--g200);border-radius:var(--radius);font-size:13px;font-weight:500;background:#fff;color:var(--g700);cursor:pointer;transition:background .15s}
-.btn-back:hover{background:var(--g50)}
-.btn-next{padding:9px 22px;border-radius:var(--radius);font-size:13px;font-weight:500;color:#fff;border:none;cursor:pointer;transition:opacity .15s,transform .1s}
-.btn-next:disabled{opacity:.3;cursor:not-allowed}
-.btn-next:not(:disabled):active{transform:scale(.98)}
-.btn-next:not(:disabled):hover{filter:brightness(.9)}
-.cat-chip-sm{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:.6rem}
-.sum-rows{display:flex;flex-direction:column;gap:7px;margin:1rem 0}
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--g50);border-radius:var(--radius);font-size:13px}
-.sum-row.spec{border-radius:0 var(--radius) var(--radius) 0}
-.sum-crit{color:var(--g500);flex:1}
-.sum-score{font-weight:500;color:var(--g700);text-align:right;font-size:12px}
-.sum-total{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:var(--radius);margin-bottom:1rem;font-weight:500;font-size:16px}
-.submit-msg{font-size:13px;padding:10px 14px;border-radius:var(--radius);margin-top:.75rem;text-align:center}
-.submit-ok{background:var(--green-l);color:var(--green-d)}
-.submit-err{background:var(--red-l);color:var(--red-d)}
-.submit-pending{background:var(--g100);color:var(--g500)}
-.action-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
-.btn-outline{padding:9px 18px;border:1px solid var(--g200);border-radius:var(--radius);font-size:13px;font-weight:500;background:#fff;color:var(--g700);cursor:pointer;transition:background .15s}
-.btn-outline:hover{background:var(--g50)}
-#leaderboard-page{max-width:740px;margin:0 auto;padding:2rem 1.5rem 4rem}
-.lb-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
-.lb-header h2{font-family:var(--fd);font-size:1.8rem}
-.lb-config{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:.25rem}
-.lb-url-input{padding:8px 12px;font-size:12px;font-family:var(--fb);border:1px solid var(--g200);border-radius:var(--radius);width:280px;color:var(--g900)}
-.lb-url-input:focus{outline:none}
-.btn-sm{padding:7px 14px;border-radius:var(--radius);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--g700);transition:background .15s}
-.btn-sm:hover{background:var(--g100)}
-.btn-sm.primary{background:var(--g900);color:#fff;border-color:var(--g900)}
-.btn-sm.primary:hover{background:#222}
-.lb-meta{font-size:12px;color:var(--g500);margin-bottom:1rem}
-.lb-status{font-size:13px;padding:10px 14px;border-radius:var(--radius);margin-bottom:1rem}
-.cat-section{margin-bottom:2.5rem}
-.cat-section-header{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius) var(--radius) 0 0}
-.cat-section-header h3{font-size:14px;font-weight:500}
-.cat-count{font-size:11px;opacity:.7;margin-left:auto}
-.lb-table{width:100%;border-collapse:collapse;font-size:13px}
-.lb-table th{text-align:left;padding:8px 14px;font-size:11px;font-weight:500;color:var(--g500);text-transform:uppercase;letter-spacing:.06em;background:var(--g50);border-bottom:1px solid var(--g200)}
-.lb-table td{padding:10px 14px;border-bottom:1px solid var(--g200);vertical-align:middle}
-.lb-table tr:last-child td{border-bottom:none}
-.lb-table tr.winner td{background:#fffbea}
-.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:500}
-.rank-1{background:#ffd700;color:#7a5800}.rank-2{background:#e0e0e0;color:#555}.rank-3{background:#f4a460;color:#6b3200}.rank-n{background:var(--g100);color:var(--g500);font-size:11px}
-.score-big{font-size:15px;font-weight:500}
-.judge-names{font-size:11px;color:var(--g500)}
-.empty-state{text-align:center;padding:3rem 2rem;color:var(--g500)}
-.lb-table-wrap{border:1px solid var(--g200);border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
-@media(max-width:500px){nav{padding:.75rem 1rem}.hero{padding:2.5rem 1rem 2rem}#leaderboard-page,#form-page{padding-left:1rem;padding-right:1rem}.lb-url-input{width:100%}}
+body{font-family:var(--fb);background:var(--surface2);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+nav{background:var(--surface);border-bottom:.5px solid var(--border);padding:0 1.25rem;display:flex;align-items:center;height:54px;position:sticky;top:0;z-index:100}
+.logo{font-family:var(--fd);font-size:1.05rem;color:var(--navy)}
+.page{display:none}
+.page.active{display:block}
+.fw{max-width:540px;margin:0 auto;padding:1.5rem 1rem 4rem}
+.ptrack{height:2px;background:var(--border);border-radius:2px;margin-bottom:1.5rem;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.card{background:var(--surface);border-radius:16px;border:.5px solid var(--border);padding:1.75rem;animation:su .28s ease}
+@keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.35rem}
+.ctitle{font-family:var(--fd);font-size:1.5rem;line-height:1.25;color:var(--ink);margin-bottom:.3rem}
+.csub{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:1.25rem}
+.wlogo{display:block;width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 1.25rem}
+.worg{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);text-align:center;margin-bottom:.25rem}
+.wtitle{font-family:var(--fd);font-size:1.7rem;line-height:1.2;color:var(--ink);text-align:center;margin-bottom:.5rem}
+.wsub{font-size:13px;color:var(--ink2);line-height:1.6;text-align:center;margin-bottom:1.5rem}
+.cat-list{display:flex;flex-direction:column;gap:7px;margin-bottom:1.25rem}
+.cat-item{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;background:var(--surface)}
+.cat-item:hover{border-color:var(--border2);background:var(--surface2)}
+.cat-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.cat-name{font-size:13px;color:var(--ink)}
+.score-list{display:flex;flex-direction:column;gap:6px;margin-bottom:1.1rem}
+.score-item{display:flex;align-items:flex-start;gap:11px;padding:9px 12px;border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;transition:border-color .15s,background .15s;background:var(--surface)}
+.score-item:hover{border-color:var(--border2)}
+.sbadge{width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;border:1px solid var(--border2);color:var(--ink2);transition:all .15s}
+.slbl{font-size:11px;font-weight:500;color:var(--ink2);margin-bottom:1px}
+.sdesc{font-size:12px;color:var(--ink3);line-height:1.4}
+.fgroup{margin-bottom:.9rem}
+.flabel{font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:4px;display:block}
+.finput{width:100%;padding:9px 12px;font-size:14px;font-family:var(--fb);color:var(--ink);background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);outline:none;transition:border-color .15s}
+.finput:focus{border-color:var(--accent)}
+textarea.finput{resize:vertical;min-height:78px;margin-top:.4rem;line-height:1.5}
+.nrow{display:flex;align-items:center;justify-content:space-between;margin-top:1.25rem;padding-top:1.1rem;border-top:.5px solid var(--border)}
+.btn{padding:8px 20px;border-radius:var(--radius);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:var(--surface);color:var(--ink);font-family:var(--fb);transition:background .15s,transform .1s}
+.btn:hover{background:var(--surface2)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.35;pointer-events:none}
+.btn-p{background:var(--accent);color:#fff;border-color:transparent}
+.btn-p:hover{filter:brightness(.87);background:var(--accent)}
+.brow{display:flex;gap:7px;flex-wrap:wrap;margin-top:1.1rem}
+.srows{display:flex;flex-direction:column;gap:6px;margin:1rem 0}
+.srow{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--surface2);border-radius:8px;font-size:13px}
+.srow.sp{border-left:2px solid var(--accent);border-radius:0 8px 8px 0}
+.sc{color:var(--ink2);flex:1}
+.ss{font-weight:500;color:var(--ink);text-align:right}
+.sw{color:var(--accent);font-weight:500}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:var(--radius);border:1.5px solid var(--accent-b);background:var(--accent-l);font-weight:500;font-size:15px;margin-bottom:.9rem}
+.tscore{font-size:20px;font-family:var(--fd);color:var(--accent)}
+.smsg{padding:9px 13px;border-radius:var(--radius);font-size:13px;margin-top:.7rem;text-align:center}
+.mok{background:#EAF3DE;color:#27500A}
+.merr{background:#FCEBEB;color:#501313}
+.mspin{background:var(--surface2);color:var(--ink2)}
+@media(max-width:480px){.card{padding:1.35rem}.ctitle{font-size:1.3rem}nav{padding:0 1rem}}
 </style>
 </head>
 <body>
-<nav>
-  <div class="nav-logo">APAMSA Judging</div>
-  <div class="nav-tabs">
-    <button class="nav-tab active" onclick="showPage('home')">Home</button>
-    <button class="nav-tab" onclick="showPage('form')">Judge</button>
-    <button class="nav-tab" onclick="showPage('leaderboard')">Leaderboard</button>
-  </div>
-</nav>
-
-<div id="home-page" class="page active">
-  <div class="hero">
-    <div class="hero-eyebrow">National APAMSA Research Conference</div>
-    <h1>Poster Judging Platform</h1>
-    <p>Score research posters across five categories. Results aggregate automatically into a live leaderboard.</p>
-    <div class="hero-cats">
-      <div class="cat-pill" style="background:#FCEBEB;color:#501313"><span class="dot" style="background:#A32D2D"></span>Community Health</div>
-      <div class="cat-pill" style="background:#FAEEDA;color:#412402"><span class="dot" style="background:#BA7517"></span>Wellbeing</div>
-      <div class="cat-pill" style="background:#FAECE7;color:#4A1B0C"><span class="dot" style="background:#C8501A"></span>Clinical &amp; Translational</div>
-      <div class="cat-pill" style="background:#EAF3DE;color:#173404"><span class="dot" style="background:#3B6D11"></span>Basic Science</div>
-      <div class="cat-pill" style="background:#E6F1FB;color:#042C53"><span class="dot" style="background:#185FA5"></span>AANHPI-focused</div>
-    </div>
-    <button class="btn-start" onclick="showPage('form')">Start judging</button>
-  </div>
-  <div style="max-width:600px;margin:3rem auto;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px">
-    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">7</div><div style="font-size:12px;color:var(--g500)">Criteria per rubric</div></div>
-    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">100</div><div style="font-size:12px;color:var(--g500)">Points possible</div></div>
-    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">5</div><div style="font-size:12px;color:var(--g500)">Categories</div></div>
+<nav><div class="logo">Research @ APAMSA</div></nav>
+<div id="page-form" class="page active">
+  <div class="fw">
+    <div class="ptrack"><div class="pfill" id="pbar" style="width:0%"></div></div>
+    <div id="fcard"></div>
   </div>
 </div>
-
-<div id="form-page" class="page">
-  <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-  <div id="form-screens"></div>
-</div>
-
-<div id="leaderboard-page" class="page">
-  <div class="lb-header">
-    <h2>Leaderboard</h2>
-    <div class="lb-config">
-      <input class="lb-url-input" id="lb-url" placeholder="Paste Apps Script URL...">
-      <button class="btn-sm primary" onclick="loadLeaderboard()">Load</button>
-      <button class="btn-sm" onclick="loadLeaderboard()">Refresh</button>
-    </div>
-  </div>
-  <div class="lb-meta" id="lb-meta"></div>
-  <div id="lb-status"></div>
-  <div id="lb-content"><div class="empty-state"><p style="font-weight:500;margin-bottom:.5rem">No data yet</p><p>Paste your Apps Script URL above and click Load.</p></div></div>
-</div>
-
 <script>
-const PALETTE=[{accent:'#A32D2D',light:'#FCEBEB',dark:'#501313',border:'#F09595'},{accent:'#BA7517',light:'#FAEEDA',dark:'#412402',border:'#EF9F27'},{accent:'#C8501A',light:'#FAECE7',dark:'#4A1B0C',border:'#F0997B'},{accent:'#3B6D11',light:'#EAF3DE',dark:'#173404',border:'#97C459'},{accent:'#185FA5',light:'#E6F1FB',dark:'#042C53',border:'#85B7EB'}];
-const CATS=['Community Health, Epidemiology, Education, and Policy','Healthcare Professional and Trainee Wellbeing','Clinical and Translational Research','Basic Science Research','AANHPI-focused Projects'];
-const SHARED=[{name:'Visual Design & Organization',weight:10,descs:{5:'Clear layout; logical flow; professional design; figures and text balanced',4:'Well-organized with minor inconsistencies; easy to follow',3:'Adequate organization; some cluttered or unclear sections',2:'Difficult to follow; inconsistent formatting; figures poorly integrated',1:'Disorganized; text-heavy or unreadable; no clear visual hierarchy'}},{name:'Clarity of Objectives / Aims',weight:15,descs:{5:'Research question precise; significance and knowledge gap clearly articulated',4:'Aims clear with minor ambiguity; significance noted',3:'Aims present but vague or partially unclear',2:'Aims difficult to identify; significance not addressed',1:'No clear aims or research question stated'}},{name:'Methods / Approach',weight:20,descs:{5:'Methods rigorous, appropriate, fully described; limitations acknowledged',4:'Methods sound with minor gaps in description or justification',3:'Methods partially described; some choices not well justified',2:'Methods poorly described or inappropriate for stated aims',1:'Methods absent, incomprehensible, or fundamentally flawed'}},{name:'Results / Findings',weight:20,descs:{5:'Results clearly presented; data well-visualized; findings address aims',4:'Results adequate; mostly clear visualizations',3:'Some results shown but incomplete or hard to interpret',2:'Results sparse, misleading, or poorly visualized',1:'No meaningful results presented'}},{name:'Conclusions & Implications',weight:15,descs:{5:'Conclusions supported by data; future directions and impact discussed',4:'Conclusions appropriate; limited future directions or impact discussion',3:'Conclusions somewhat supported; overstated or incomplete',2:'Conclusions unsupported or missing; no implications discussed',1:'No conclusions drawn; or conclusions entirely unsupported'}},{name:'Presenter Knowledge & Engagement',weight:15,descs:{5:'Deep understanding; answers questions confidently; enthusiastic',4:'Good knowledge; handles most questions well; generally engaging',3:'Basic understanding; struggles with some questions; moderate engagement',2:'Limited knowledge beyond the poster; difficulty answering questions',1:'Unable to explain or defend the work presented'}}];
-const SPECIFIC=[{name:'Community Relevance & Impact',weight:20,descs:{5:'Strong community need; robust stakeholder engagement; clear policy implications',4:'Community relevance evident; some stakeholder involvement; reasonable implications',3:'Community context present but superficial; limited discussion of impact',2:'Community relevance unclear; minimal stakeholder engagement',1:'No community context or public health relevance articulated'}},{name:'Relevance to Wellbeing & Workforce',weight:20,descs:{5:'Addresses documented wellbeing gap; actionable; training implications concrete',4:'Wellbeing focus clear; actionable elements present with minor gaps',3:'Wellbeing topic addressed but intervention underdeveloped',2:'Tenuous link to wellbeing; limited applicability to trainees',1:'No meaningful connection to healthcare professional/trainee wellbeing'}},{name:'Translational Significance',weight:20,descs:{5:'Clear bench-to-bedside pathway; clinical applicability articulated; feasibility discussed',4:'Translational potential evident; some discussion of clinical relevance',3:'Translational link implied but not explicitly developed',2:'Clinical application unclear or speculative without support',1:'No translational relevance or clinical application addressed'}},{name:'Scientific Rigor & Innovation',weight:20,descs:{5:'Hypothesis well-grounded; controls robust; novel contribution clearly stated',4:'Solid hypothesis and controls; novelty noted but not fully developed',3:'Hypothesis present; some controls; novelty unclear',2:'Weak hypothesis or insufficient controls; limited scientific contribution',1:'No clear hypothesis; no controls; no evident contribution to the field'}},{name:'AANHPI Community Focus & Cultural Relevance',weight:20,descs:{5:'Addresses AANHPI disparities; culturally informed; disaggregated data; community voice',4:'AANHPI focus clear; culturally relevant; minor gaps in disaggregation or engagement',3:'AANHPI population included but not central; limited cultural contextualization',2:'AANHPI mentioned superficially; no meaningful disparity framing',1:'No meaningful AANHPI relevance despite category submission'}}];
-const LABELS={5:'Excellent',4:'Good',3:'Satisfactory',2:'Needs improvement',1:'Inadequate'};
+const PAL=[
+  {accent:'#A32D2D',light:'#FCEBEB',dark:'#501313',border:'#F09595'},
+  {accent:'#BA7517',light:'#FAEEDA',dark:'#412402',border:'#EF9F27'},
+  {accent:'#C85A20',light:'#FAECE7',dark:'#4A1B0C',border:'#F0997B'},
+  {accent:'#3B6D11',light:'#EAF3DE',dark:'#173404',border:'#97C459'},
+  {accent:'#185FA5',light:'#E6F1FB',dark:'#042C53',border:'#85B7EB'},
+];
+const CATS=[
+  'Community Health, Epidemiology, Education, and Policy',
+  'Healthcare Professional and Trainee Wellbeing',
+  'Clinical and Translational Research',
+  'Basic Science Research',
+  'AANHPI-focused Projects',
+];
+const SHARED=[
+  {name:'Clarity of Objectives / Aims',weight:15,descs:{5:'Research question precise; significance and knowledge gap clearly articulated',4:'Aims clear with minor ambiguity; significance noted',3:'Aims present but vague or partially unclear',2:'Aims difficult to identify; significance not addressed',1:'No clear aims or research question stated'}},
+  {name:'Methods / Approach',weight:15,descs:{5:'Methods rigorous, appropriate, fully described; limitations acknowledged',4:'Methods sound with minor gaps in description or justification',3:'Methods partially described; some choices not well justified',2:'Methods poorly described or inappropriate for stated aims',1:'Methods absent, incomprehensible, or fundamentally flawed'}},
+  {name:'Results / Findings',weight:15,descs:{5:'Results clearly presented; data well-visualized; findings address aims',4:'Results adequate; mostly clear visualizations',3:'Some results shown but incomplete or hard to interpret',2:'Results sparse, misleading, or poorly visualized',1:'No meaningful results presented'}},
+  {name:'Conclusions & Implications',weight:20,descs:{5:'Conclusions supported by data; future directions and impact discussed',4:'Conclusions appropriate; limited future directions or impact discussion',3:'Conclusions somewhat supported; overstated or incomplete',2:'Conclusions unsupported or missing; no implications discussed',1:'No conclusions drawn; or conclusions entirely unsupported'}},
+  {name:'Presenter Knowledge & Engagement',weight:10,descs:{5:'Deep understanding; answers questions confidently; enthusiastic',4:'Good knowledge; handles most questions well; generally engaging',3:'Basic understanding; struggles with some questions; moderate engagement',2:'Limited knowledge beyond the poster; difficulty answering questions',1:'Unable to explain or defend the work presented'}},
+  {name:'Visual Design & Organization',weight:5,descs:{5:'Clear layout; logical flow; professional design; figures and text balanced',4:'Well-organized with minor inconsistencies; easy to follow',3:'Adequate organization; some cluttered or unclear sections',2:'Difficult to follow; inconsistent formatting; figures poorly integrated',1:'Disorganized; text-heavy or unreadable; no clear visual hierarchy'}},
+];
+const SPEC=[
+  {name:'Community Relevance & Impact',weight:20,descs:{5:'Strong community need; robust stakeholder engagement; clear policy implications',4:'Community relevance evident; some stakeholder involvement; reasonable implications',3:'Community context present but superficial; limited discussion of impact',2:'Community relevance unclear; minimal stakeholder engagement',1:'No community context or public health relevance articulated'}},
+  {name:'Relevance to Wellbeing & Workforce',weight:20,descs:{5:'Addresses documented wellbeing gap; actionable; training implications concrete',4:'Wellbeing focus clear; actionable elements present with minor gaps',3:'Wellbeing topic addressed but intervention underdeveloped',2:'Tenuous link to wellbeing; limited applicability to trainees',1:'No meaningful connection to healthcare professional/trainee wellbeing'}},
+  {name:'Translational Significance',weight:20,descs:{5:'Clear bench-to-bedside pathway; clinical applicability articulated; feasibility discussed',4:'Translational potential evident; some discussion of clinical relevance',3:'Translational link implied but not explicitly developed',2:'Clinical application unclear or speculative without support',1:'No translational relevance or clinical application addressed'}},
+  {name:'Scientific Rigor & Innovation',weight:20,descs:{5:'Hypothesis well-grounded; controls robust; novel contribution clearly stated',4:'Solid hypothesis and controls; novelty noted but not fully developed',3:'Hypothesis present; some controls; novelty unclear',2:'Weak hypothesis or insufficient controls; limited scientific contribution',1:'No clear hypothesis; no controls; no evident contribution to the field'}},
+  {name:'AANHPI Community Focus & Cultural Relevance',weight:20,descs:{5:'Addresses AANHPI disparities; culturally informed; disaggregated data; community voice',4:'AANHPI focus clear; culturally relevant; minor gaps in disaggregation or engagement',3:'AANHPI population included but not central; limited cultural contextualization',2:'AANHPI mentioned superficially; no meaningful disparity framing',1:'No meaningful AANHPI relevance despite category submission'}},
+];
+const SL={5:'Excellent',4:'Good',3:'Satisfactory',2:'Needs improvement',1:'Inadequate'};
+const LOGO='data:image/jpeg;base64,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qkctm2gAgSblNxkCpJbX3VwnQI3qg3CGVMJjBVxKwUah3UaUbkkafCC9Wh0cXsTrcKLhHMJFxoURgYIXFLCFaB/A6+mRXteCda/iKjbWZyS39Z9cdNB4jg2I2klYlBpaZ8JPmfROUJG8ZbIFLDPhLQ2ghYGyCIvcXMqyiM5Opp/xbLAxkaulBAXuLmbSMAW4Z9PqoYKGhH/hww0NKtRoC3DLp97Z+eTAObvUMFDQj/wYYKGlWj55sA5O/wADgVYfg+qwfJuJmZnz8HyZgZuRXBaw/B9/CYQRrLTtSInUE/g6fNDE6gn9HSiElay17fEE5EDkatNXy3mMd1KUCAQnyVKBAJWrTV8F5jDdQnIgcB8dbYaLCe/GrKBwrTfePj20DhWu680NsNFpfbh8tOVdU7y5qCocbMfGE0uBb4SfBHIt0pagqnG3HxjFLwrqjcXHz3o5xsW5vKyVsH+lLqFxm6MNa5nS67PXM6XSlxS4xdCWs1LF/pR0eY2je3v/ABF7pgSVe5XGbzhTMvSnOhp3TlrGDe96wL76jFGrCDe96N05KZl6UZ0FXKUxm85UPNMCD4n/2gAMAwEAAgADAAAAEPPPPPPPPONXHPLLOdPPPPPPPPPPPPPPAXfffffffffbQfPPPPPPPPPHXnfffffbfffffbarfPPPPPPOVvfffffbvHvfffffatfPPPPHTvffffffzvBfffffffTrfPPPDvffffffcfPPOfffffffbvPPEXffffffes/PPBPffffffbYfPHfffffffcvPPPPHPffffffbfOPfffffffH/ADzzzzfz3333333S33333331HzzzZWr/AL9999999d8999999v8APPKX/tvG9PfffffbH/fffffdvPN3b3fPPA/fffffbPPffffbvPDHvcvPPPPF/fffffN/fffeW/PNfbHPPPPPHvffffePPfffbfPE3fe/PPPPPPGvfffeOffffazDPffbTDDDDDDMffffdbPffaPKP3en/lvEPMm92lfffXPNffVRIrvi21vjD+9T9yvffefPBdeyKzcjksrqJyuwVqatPeSfPPNrLXv/AL13002946m21xzyLzzzzXL33333333333333333Lnzzzzy1b333333333333332p3zzzzzzzXbX33333333333nrnzzzzzzzzzwHX333333333kHzzz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';
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxNr4xiLGAUM0sOKtjW_CwZZJUJdSWY6-P48tERLjdlfpulk484YDG4vbt58wzMDECp/exec';
 
-let sheetsUrl=localStorage.getItem('apamsa_url')||'';
-let state={catIdx:0,info:{judge:'',poster:'',presenter:''},scores:{},notes:{}};
-let steps=[],cur=0;
-
-function showPage(p){
-  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
-  document.getElementById(p+'-page').classList.add('active');
-  const tabs=document.querySelectorAll('.nav-tab');
-  if(p==='home')tabs[0].classList.add('active');
-  if(p==='form'){tabs[1].classList.add('active');renderForm();}
-  if(p==='leaderboard'){tabs[2].classList.add('active');initLeaderboard();}
+let fs={ci:0,judge:'',poster:'',presenter:'',scores:{},notes:{},str:'',imp:''};
+let steps=[],si=0;
+function p(i){return PAL[i!==undefined?i:fs.ci];}
+function gk(ci,i){return ci+'_'+i;}
+function buildSteps(){
+  const cr=[...SHARED,{...SPEC[fs.ci],isSp:true}];
+  steps=[{t:'welcome'},{t:'cat'},{t:'info'},...cr.map((c,i)=>({t:'score',c,i})),{t:'notes'},{t:'sum'}];
+  si=0;
 }
-function pal(i){return PALETTE[i!==undefined?i:state.catIdx];}
-function buildSteps(ci){const criteria=[...SHARED,{...SPECIFIC[ci],isSpecific:true}];steps=[{type:'setup'},{type:'cat'},{type:'info'},...criteria.map((c,i)=>({type:'score',crit:c,idx:i})),{type:'notes'},{type:'summary'}];cur=0;}
-function gk(ci,cri){return ci+'_'+cri;}
-function total(ci){return Math.round([...SHARED,SPECIFIC[ci]].reduce((t,c,i)=>{const s=state.scores[gk(ci,i)];return t+(s?(s/5)*c.weight:0);},0)*10)/10;}
-
-function applyTheme(){
-  const p=pal();
-  document.getElementById('progress-fill').style.background=p.accent;
-  let s=document.getElementById('theme-dyn');
-  if(!s){s=document.createElement('style');s.id='theme-dyn';document.head.appendChild(s);}
-  s.textContent=`.step-lbl{color:${p.accent}}.score-opt:hover{border-color:${p.border}}.score-opt.sel{border-color:${p.accent};background:${p.light}}.score-opt.sel .score-circle{background:${p.accent};color:#fff}.score-opt.sel .score-lbl{color:${p.dark}}.field-group input:focus,.field-group textarea:focus{border-color:${p.accent}}.btn-next-t{background:${p.accent}}.btn-next-t:hover{background:${p.dark}}`;
+function total(){
+  return Math.round([...SHARED,SPEC[fs.ci]].reduce((t,c,i)=>{
+    const s=fs.scores[gk(fs.ci,i)];return t+(s?(s/5)*c.weight:0);
+  },0)*10)/10;
 }
+function theme(pp){
+  const r=document.documentElement.style;
+  r.setProperty('--accent',pp.accent);
+  r.setProperty('--accent-l',pp.light);
+  r.setProperty('--accent-d',pp.dark);
+  r.setProperty('--accent-b',pp.border);
+  document.getElementById('pbar').style.background=pp.accent;
+}
+function rf(){
+  const pp=p();theme(pp);
+  document.getElementById('pbar').style.width=Math.round((si/(steps.length-1))*100)+'%';
+  const step=steps[si];
+  const el=document.getElementById('fcard');
 
-function nbtn(label,disabled){return `<button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="next-btn"${disabled?' disabled style="opacity:.3;cursor:not-allowed"':''}>${label}</button>`;}
+  if(step.t==='welcome'){
+    el.innerHTML=`<div class="card" style="text-align:center;padding:2.25rem 1.75rem">
+      <img src="${LOGO}" class="wlogo" alt="APAMSA logo">
+      <div class="worg">National APAMSA Research Conference</div>
+      <div class="wtitle">Poster Judging</div>
+      <div class="wsub">Thank you for serving as a judge. This form will guide you through scoring a research poster step by step.</div>
+      <button class="btn btn-p" onclick="nx()" style="margin:0 auto;display:block;padding:10px 32px">Begin</button>
+    </div>`;
 
-function renderForm(){
-  if(!steps.length)buildSteps(0);
-  applyTheme();
-  const p=pal();
-  document.getElementById('progress-fill').style.width=Math.round((cur/(steps.length-1))*100)+'%';
-  const c=document.getElementById('form-screens');c.innerHTML='';
-  const s=steps[cur];
-  const screen=document.createElement('div');
-  screen.className='form-screen active';
-  screen.style.cssText='max-width:560px;margin:0 auto;padding:2rem 0 2rem';
+  }else if(step.t==='cat'){
+    el.innerHTML=`<div class="card">
+      <div class="eyebrow" style="color:${pp.accent}">Step 1</div>
+      <div class="ctitle">Which category are you judging?</div>
+      <div class="csub">Select the poster's submission category to load the correct rubric.</div>
+      <div class="cat-list">${CATS.map((c,i)=>{const cp=p(i);const sel=fs.ci===i;return`<div class="cat-item" data-c="${i}" style="${sel?`border-color:${cp.accent};background:${cp.light}`:''}">
+        <span class="cat-dot" style="background:${cp.accent}"></span>
+        <span class="cat-name">${c}</span></div>`;}).join('')}</div>
+      <div class="nrow"><button class="btn" onclick="bk()">Back</button><button class="btn btn-p" onclick="nx()">Continue</button></div></div>`;
+    el.querySelectorAll('[data-c]').forEach(d=>d.addEventListener('click',()=>{fs.ci=+d.dataset.c;buildSteps();si=1;rf();}));
 
-  if(s.type==='setup'){
-    const isSet=sheetsUrl.startsWith('https://');
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Setup</span></div><div class="q-title">Connect your Google Sheet</div><div class="q-sub">Paste your Apps Script web app URL to log every submission automatically. Saved in your browser — only needed once.</div><div class="url-banner"><div class="url-banner-title">Apps Script web app URL</div><div class="url-banner-sub">In Google Sheets: Extensions → Apps Script → Deploy → New deployment → Web app → Anyone → Deploy → copy URL</div><div class="field-group" style="margin-bottom:8px"><input id="url-input" placeholder="https://script.google.com/macros/s/.../exec" value="${sheetsUrl}" style="font-size:12px"></div>${isSet?'<div class="url-connected"><span class="url-dot-live"></span>URL saved and ready</div>':''}</div><div style="display:flex;gap:8px"><button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="save-url">Save & continue</button><button class="btn-outline" id="skip-url">Skip (no sheet)</button></div>`;
-    screen.querySelector('#save-url').onclick=()=>{const v=document.getElementById('url-input').value.trim();if(v.startsWith('https://')){sheetsUrl=v;localStorage.setItem('apamsa_url',v);}cur++;renderForm();};
-    screen.querySelector('#skip-url').onclick=()=>{cur++;renderForm();};
+  }else if(step.t==='info'){
+    el.innerHTML=`<div class="card">
+      <div class="eyebrow" style="color:${pp.accent}">Step 2</div>
+      <div class="ctitle">Your details</div>
+      <div class="csub">Appears on your scoring rubric and helps us stay organized.</div>
+      <div class="fgroup"><label class="flabel">Your name</label><input class="finput" id="fj" placeholder="e.g. Dr. Sarah Kim" value="${fs.judge}"></div>
+      <div class="fgroup"><label class="flabel">Poster number</label><input class="finput" id="fp" placeholder="e.g. 042" value="${fs.poster}"></div>
+      <div class="fgroup"><label class="flabel">Presenter name</label><input class="finput" id="fr" placeholder="e.g. Alex Chen" value="${fs.presenter}"></div>
+      <div class="nrow"><button class="btn" onclick="bk()">Back</button><button class="btn btn-p" onclick="saveInfo()">Start scoring</button></div></div>`;
 
-  }else if(s.type==='cat'){
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Category</span></div><div class="q-title">Which category?</div><div class="q-sub">Select the poster's submission category.</div><div class="score-list">${CATS.map((cat,i)=>{const cp=pal(i);const sel=state.catIdx===i;return`<div class="score-opt${sel?' sel':''}" data-cat="${i}" style="${sel?`border-color:${cp.accent};background:${cp.light}`:''}"><div class="score-circle" style="${sel?`background:${cp.accent};color:#fff`:''}"> ${i+1}</div><div class="score-content" style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;border-radius:50%;background:${cp.accent};flex-shrink:0;display:inline-block"></span><span style="font-size:13px">${cat}</span></div></div>`;}).join('')}</div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Continue',false)}</div>`;
-    screen.querySelectorAll('[data-cat]').forEach(el=>{el.onclick=()=>{state.catIdx=parseInt(el.dataset.cat);buildSteps(state.catIdx);cur=1;renderForm();};});
+  }else if(step.t==='score'){
+    const {c,i}=step;const key=gk(fs.ci,i);const sel=fs.scores[key];const note=fs.notes[key]||'';
+    const totalCrit=SHARED.length+1;
+    const label=c.isSp?'Category-specific criterion':`Criterion ${i+1} of ${totalCrit}`;
+    el.innerHTML=`<div class="card">
+      <div class="eyebrow" style="color:${pp.accent}">${label}</div>
+      ${c.isSp?`<div style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500;background:${pp.light};color:${pp.dark};border:1px solid ${pp.border};margin-bottom:.5rem">${CATS[fs.ci]}</div>`:''}
+      <div class="ctitle">${c.name}</div>
+      <div class="csub">Weight: <strong>${c.weight}%</strong> of total score</div>
+      <div class="score-list">${[5,4,3,2,1].map(s=>`<div class="score-item" data-s="${s}" style="${sel===s?`border-color:${pp.accent};background:${pp.light}`:''}">
+        <div class="sbadge" style="${sel===s?`background:${pp.accent};color:#fff;border-color:${pp.accent}`:''}"> ${s}</div>
+        <div><div class="slbl" style="${sel===s?`color:${pp.dark}`:''}"> ${SL[s]}</div><div class="sdesc" style="${sel===s?`color:${pp.dark}`:''}"> ${c.descs[s]}</div></div>
+      </div>`).join('')}</div>
+      <textarea class="finput" id="cnote" placeholder="Optional notes...">${note}</textarea>
+      <div class="nrow"><button class="btn" onclick="bk()">Back</button><button class="btn btn-p" id="nxb" onclick="nx()" ${!sel?'disabled':''}>Next</button></div></div>`;
+    el.querySelectorAll('[data-s]').forEach(d=>d.addEventListener('click',()=>{fs.scores[key]=+d.dataset.s;rf();}));
 
-  }else if(s.type==='info'){
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Details</span></div><div class="q-title">Judge & poster info</div><div class="q-sub">Appears in the leaderboard alongside scores.</div><div class="field-group"><label>Your name</label><input id="f-judge" placeholder="e.g. Dr. Sarah Kim" value="${state.info.judge}"></div><div class="field-group"><label>Poster number</label><input id="f-poster" placeholder="e.g. 042" value="${state.info.poster}"></div><div class="field-group"><label>Presenter name</label><input id="f-presenter" placeholder="e.g. Alex Chen" value="${state.info.presenter}"></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Start scoring',false)}</div>`;
+  }else if(step.t==='notes'){
+    el.innerHTML=`<div class="card">
+      <div class="eyebrow" style="color:${pp.accent}">Almost done</div>
+      <div class="ctitle">Overall comments</div>
+      <div class="csub">Optional feedback for the presenter.</div>
+      <label class="flabel" style="margin-top:.25rem">Strengths</label>
+      <textarea class="finput" id="fstr" placeholder="What did this poster do well?">${fs.str}</textarea>
+      <label class="flabel" style="margin-top:.7rem">Areas for improvement</label>
+      <textarea class="finput" id="fimp" placeholder="What could be strengthened?">${fs.imp}</textarea>
+      <div class="nrow"><button class="btn" onclick="bk()">Back</button><button class="btn btn-p" onclick="saveNotes()">Review &amp; submit</button></div></div>`;
 
-  }else if(s.type==='score'){
-    const{crit,idx}=s;const key=gk(state.catIdx,idx);const sel=state.scores[key];const note=state.notes[key]||'';const isSpec=!!crit.isSpecific;
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">${isSpec?'Category criterion':`Criterion ${idx+1} of ${SHARED.length}`}</span></div>${isSpec?`<div class="cat-chip-sm" style="background:${p.light};color:${p.dark}">${CATS[state.catIdx]}</div>`:''}<div class="q-title">${crit.name}</div><div class="q-sub">Weight: <strong>${crit.weight}%</strong> of total score</div><div class="score-list">${[5,4,3,2,1].map(n=>`<div class="score-opt${sel===n?' sel':''}" data-score="${n}"><div class="score-circle">${n}</div><div class="score-content"><div class="score-lbl">${LABELS[n]}</div><div class="score-dsc">${crit.descs[n]}</div></div></div>`).join('')}</div><div class="field-group"><label>Notes (optional)</label><textarea id="crit-note" placeholder="Any specific observations...">${note}</textarea></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Next',!sel)}</div>`;
-    screen.querySelectorAll('[data-score]').forEach(el=>{el.onclick=()=>{state.scores[key]=parseInt(el.dataset.score);renderForm();};});
-
-  }else if(s.type==='notes'){
-    const ok='ov_'+state.catIdx;
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Comments</span></div><div class="q-title">Overall feedback</div><div class="q-sub">Optional — shared with the presenter after the conference.</div><div class="field-group"><label>Strengths</label><textarea id="ov-s" placeholder="What did this poster do particularly well?">${state.notes[ok+'s']||''}</textarea></div><div class="field-group"><label>Areas for improvement</label><textarea id="ov-i" placeholder="What could be strengthened?">${state.notes[ok+'i']||''}</textarea></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Review & submit',false)}</div>`;
-
-  }else if(s.type==='summary'){
-    const ci=state.catIdx;const criteria=[...SHARED,SPECIFIC[ci]];const tot=total(ci);const ok='ov_'+ci;const str=state.notes[ok+'s']||'';const imp=state.notes[ok+'i']||'';const hasUrl=sheetsUrl.startsWith('https://');
-    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Summary</span></div><div class="q-title">Rubric complete</div><div class="q-sub"><strong>${CATS[ci]}</strong><br>Poster #${state.info.poster||'—'} · ${state.info.presenter||'—'} · Judge: ${state.info.judge||'—'}</div><div class="sum-rows">${criteria.map((c,i)=>{const sc=state.scores[gk(ci,i)];const wtd=sc?((sc/5)*c.weight).toFixed(1):'—';const isSpec=i===SHARED.length;return`<div class="sum-row${isSpec?' spec':''}"${isSpec?` style="border-left:2px solid ${p.accent};"`:''}><span class="sum-crit">${c.name}</span><span class="sum-score">${sc?LABELS[sc]+' ('+sc+'/5)':'—'} &nbsp;<strong style="color:${p.accent}">${wtd}/${c.weight}</strong></span></div>`;}).join('')}</div><div class="sum-total" style="background:${p.light};border:1px solid ${p.border}"><span>Total score</span><span style="color:${p.accent};font-size:18px;font-family:var(--fd)">${tot} / 100</span></div>${str||imp?`<div style="font-size:13px;color:var(--g500);line-height:1.6;margin-bottom:.5rem">${str?`<strong style="color:var(--g700)">Strengths:</strong> ${str}<br>`:''}${imp?`<strong style="color:var(--g700)">Improvements:</strong> ${imp}`:''}</div>`:''}<div id="sub-msg"></div><div class="action-btns">${hasUrl?`<button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="submit-btn">Submit to leaderboard</button>`:''}<button class="btn-outline" id="copy-btn">Copy summary</button><button class="btn-outline" id="new-btn">Score another</button></div><div class="nav-btns" style="border:none;padding-top:.75rem"><button class="btn-back" id="back-btn">Back</button><span></span></div>`;
-    if(hasUrl){screen.querySelector('#submit-btn').onclick=async function(){const btn=this;const msg=screen.querySelector('#sub-msg');btn.disabled=true;btn.style.opacity='.5';msg.className='submit-msg submit-pending';msg.textContent='Sending...';try{await fetch(sheetsUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({judge:state.info.judge,poster:state.info.poster,presenter:state.info.presenter,category:CATS[ci],s0:state.scores[gk(ci,0)],s1:state.scores[gk(ci,1)],s2:state.scores[gk(ci,2)],s3:state.scores[gk(ci,3)],s4:state.scores[gk(ci,4)],s5:state.scores[gk(ci,5)],s6:state.scores[gk(ci,6)],total:tot,strengths:str,improvements:imp})});msg.className='submit-msg submit-ok';msg.textContent='Submitted — score recorded in the leaderboard.';btn.textContent='Submitted';}catch(e){msg.className='submit-msg submit-err';msg.textContent='Could not reach the sheet. Use Copy summary as backup.';btn.disabled=false;btn.style.opacity='1';btn.textContent='Retry';}};}
-    screen.querySelector('#copy-btn').onclick=()=>{const lines=[`APAMSA Poster Judging Rubric`,`Category: ${CATS[ci]}`,`Poster #: ${state.info.poster} | Presenter: ${state.info.presenter} | Judge: ${state.info.judge}`,``,...criteria.map((c,i)=>{const sc=state.scores[gk(ci,i)]||'N/A';const w=sc!=='N/A'?((sc/5)*c.weight).toFixed(1):'—';return`${c.name} (${c.weight}%): ${sc}/5 = ${w} pts`;}),``,`TOTAL: ${tot} / 100`,str?`\nStrengths: ${str}`:'',imp?`Areas for improvement: ${imp}`:''  ].filter(Boolean).join('\n');navigator.clipboard.writeText(lines).then(()=>{const b=screen.querySelector('#copy-btn');b.textContent='Copied!';setTimeout(()=>{b.textContent='Copy summary';},2000);});};
-    screen.querySelector('#new-btn').onclick=()=>{state.scores={};state.notes={};state.info={judge:state.info.judge,poster:'',presenter:''};buildSteps(state.catIdx);cur=1;renderForm();};
+  }else if(step.t==='sum'){
+    const ci=fs.ci;const criteria=[...SHARED,SPEC[ci]];const tot=total();
+    el.innerHTML=`<div class="card">
+      <div class="eyebrow" style="color:${pp.accent}">Review &amp; submit</div>
+      <div class="ctitle">Rubric summary</div>
+      <div class="csub"><strong>${CATS[ci]}</strong><br>Poster #${fs.poster||'—'} &nbsp;·&nbsp; ${fs.presenter||'—'} &nbsp;·&nbsp; Judge: ${fs.judge||'—'}</div>
+      <div class="srows">${criteria.map((c,i)=>{const s=fs.scores[gk(ci,i)];const w=s?((s/5)*c.weight).toFixed(1):'—';return`<div class="srow ${i===SHARED.length?'sp':''}">
+        <span class="sc">${c.name}</span>
+        <span class="ss">${s?SL[s]+' ('+s+'/5)':'—'} &nbsp;<span class="sw">${w}/${c.weight}</span></span></div>`;}).join('')}</div>
+      <div class="trow"><span>Total score</span><span class="tscore">${tot} / 100</span></div>
+      ${fs.str||fs.imp?`<div style="font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:.75rem">${fs.str?`<strong style="color:var(--ink)">Strengths:</strong> ${fs.str}<br>`:''}${fs.imp?`<strong style="color:var(--ink)">Improvements:</strong> ${fs.imp}`:''}</div>`:''}
+      <div id="smsg"></div>
+      <div class="brow">
+        <button class="btn btn-p" id="subb" onclick="submitScore()">Submit score</button>
+        <button class="btn" onclick="cpText()">Copy summary</button>
+        <button class="btn" onclick="again()">Score another</button>
+      </div>
+      <div class="nrow" style="border:none;padding-top:.75rem"><button class="btn" onclick="bk()">Back</button><span></span></div></div>`;
   }
-
-  const nb=screen.querySelector('#next-btn');const bb=screen.querySelector('#back-btn');
-  if(nb)nb.onclick=()=>{if(s.type==='info'){state.info.judge=document.getElementById('f-judge').value;state.info.poster=document.getElementById('f-poster').value;state.info.presenter=document.getElementById('f-presenter').value;}if(s.type==='notes'){const ok='ov_'+state.catIdx;state.notes[ok+'s']=document.getElementById('ov-s').value;state.notes[ok+'i']=document.getElementById('ov-i').value;}if(s.type==='score'){const el=document.getElementById('crit-note');if(el)state.notes[gk(state.catIdx,s.idx)]=el.value;}cur++;renderForm();};
-  if(bb)bb.onclick=()=>{if(s.type==='notes'){const ok='ov_'+state.catIdx;const sv=document.getElementById('ov-s');const iv=document.getElementById('ov-i');if(sv)state.notes[ok+'s']=sv.value;if(iv)state.notes[ok+'i']=iv.value;}cur--;renderForm();};
-  c.appendChild(screen);
 }
-
-function initLeaderboard(){
-  const saved=localStorage.getItem('apamsa_url')||'';
-  if(saved)document.getElementById('lb-url').value=saved;
+function nx(){
+  const step=steps[si];
+  if(step.t==='score'){const e=document.getElementById('cnote');if(e)fs.notes[gk(fs.ci,step.i)]=e.value;}
+  si++;rf();
 }
-
-async function loadLeaderboard(){
-  const url=document.getElementById('lb-url').value.trim();
-  if(!url.startsWith('https://')){document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#FCEBEB;color:#501313">Please enter a valid Apps Script URL.</div>`;return;}
-  localStorage.setItem('apamsa_url',url);sheetsUrl=url;
-  document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#f0f0f0;color:#888">Loading results...</div>`;
+function bk(){
+  const step=steps[si];
+  if(step.t==='notes'){const s=document.getElementById('fstr');const m=document.getElementById('fimp');if(s)fs.str=s.value;if(m)fs.imp=m.value;}
+  if(step.t==='score'){const e=document.getElementById('cnote');if(e)fs.notes[gk(fs.ci,step.i)]=e.value;}
+  si--;rf();
+}
+function saveInfo(){
+  fs.judge=document.getElementById('fj').value.trim();
+  fs.poster=document.getElementById('fp').value.trim();
+  fs.presenter=document.getElementById('fr').value.trim();
+  si++;rf();
+}
+function saveNotes(){
+  fs.str=document.getElementById('fstr').value;
+  fs.imp=document.getElementById('fimp').value;
+  si++;rf();
+}
+async function submitScore(){
+  const btn=document.getElementById('subb');
+  const msg=document.getElementById('smsg');
+  btn.disabled=true;btn.textContent='Submitting...';
+  msg.className='smsg mspin';msg.textContent='Sending your score...';
   try{
-    const resp=await fetch(url+'?action=leaderboard');
-    const data=await resp.json();
-    renderLeaderboard(data);
-    document.getElementById('lb-meta').textContent=`Last refreshed: ${new Date().toLocaleTimeString()} · ${data.total||0} submission${data.total!==1?'s':''} total`;
-    document.getElementById('lb-status').innerHTML='';
-  }catch(e){document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#FCEBEB;color:#501313">Could not load data. Check the URL and make sure the script is deployed with "Anyone" access.</div>`;}
+    const ci=fs.ci;
+    await fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      judge:fs.judge,poster:fs.poster,presenter:fs.presenter,category:CATS[ci],
+      s0:fs.scores[gk(ci,0)],s1:fs.scores[gk(ci,1)],s2:fs.scores[gk(ci,2)],
+      s3:fs.scores[gk(ci,3)],s4:fs.scores[gk(ci,4)],s5:fs.scores[gk(ci,5)],
+      s6:fs.scores[gk(ci,6)],total:total(),strengths:fs.str,improvements:fs.imp
+    })});
+    msg.className='smsg mok';msg.textContent='Score submitted successfully!';
+    btn.textContent='Submitted';
+  }catch(e){
+    msg.className='smsg merr';msg.textContent='Network error — please use Copy summary as backup.';
+    btn.disabled=false;btn.textContent='Retry';
+  }
 }
-
-function renderLeaderboard(data){
-  const content=document.getElementById('lb-content');
-  if(!data.categories||!Object.keys(data.categories).length){content.innerHTML=`<div class="empty-state"><p style="font-weight:500;margin-bottom:.5rem">No submissions yet</p><p>Scores will appear here as judges submit.</p></div>`;return;}
-  content.innerHTML=CATS.map((cat,ci)=>{
-    const p=PALETTE[ci];const entries=(data.categories[cat]||[]).sort((a,b)=>b.avg-a.avg);
-    if(!entries.length)return'';
-    return`<div class="cat-section"><div class="cat-section-header" style="background:${p.light}"><span style="width:10px;height:10px;border-radius:50%;background:${p.accent};flex-shrink:0;display:inline-block"></span><h3 style="color:${p.dark}">${cat}</h3><span class="cat-count" style="color:${p.dark}">${entries.length} poster${entries.length!==1?'s':''}</span></div><div class="lb-table-wrap"><table class="lb-table"><thead><tr><th>Rank</th><th>Poster</th><th>Presenter</th><th>Avg score</th><th>Judges</th></tr></thead><tbody>${entries.map((e,i)=>`<tr${i===0?' class="winner"':''}><td><span class="rank-badge ${i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-n'}">${i===0?'1st':i===1?'2nd':i===2?'3rd':(i+1)+'th'}</span></td><td><strong>#${e.poster}</strong></td><td>${e.presenter}</td><td><span class="score-big" style="color:${p.accent}">${(+e.avg).toFixed(1)}</span><span style="color:#999;font-size:12px"> /100</span></td><td><div class="judge-names">${e.judges.join(', ')}</div></td></tr>`).join('')}</tbody></table></div></div>`;
-  }).join('');
+function cpText(){
+  const ci=fs.ci;const cr=[...SHARED,SPEC[ci]];
+  const lines=[`APAMSA Poster Judging Rubric`,`Category: ${CATS[ci]}`,
+    `Poster #: ${fs.poster}  |  Presenter: ${fs.presenter}  |  Judge: ${fs.judge}`,``,
+    ...cr.map((c,i)=>{const s=fs.scores[gk(ci,i)]||'N/A';const w=s!=='N/A'?((s/5)*c.weight).toFixed(1):'—';return`${c.name} (${c.weight}%): ${s}/5 = ${w} pts`;}),
+    ``,`TOTAL: ${total()} / 100`,
+    fs.str?`\nStrengths: ${fs.str}`:'',fs.imp?`Areas for improvement: ${fs.imp}`:'',
+  ].filter(l=>l!==undefined).join('\n');
+  navigator.clipboard.writeText(lines).then(()=>{
+    const btns=document.querySelectorAll('.brow .btn');
+    const b=btns[1];if(b){b.textContent='Copied!';setTimeout(()=>{b.textContent='Copy summary';},2000);}
+  });
 }
-
-buildSteps(0);
+function again(){
+  fs={...fs,poster:'',presenter:'',scores:{},notes:{},str:'',imp:''};
+  buildSteps();si=1;rf();
+}
+buildSteps();rf();
 </script>
 </body>
 </html>
