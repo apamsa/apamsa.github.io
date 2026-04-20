@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APAMSA Poster Judging</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--red:#A32D2D;--red-l:#FCEBEB;--red-d:#501313;--red-b:#F09595;--yellow:#BA7517;--yellow-l:#FAEEDA;--yellow-d:#412402;--yellow-b:#EF9F27;--orange:#C8501A;--orange-l:#FAECE7;--orange-d:#4A1B0C;--orange-b:#F0997B;--green:#3B6D11;--green-l:#EAF3DE;--green-d:#173404;--green-b:#97C459;--blue:#185FA5;--blue-l:#E6F1FB;--blue-d:#042C53;--blue-b:#85B7EB;--g50:#fafafa;--g100:#f4f4f4;--g200:#e8e8e8;--g500:#888;--g700:#444;--g900:#111;--radius:10px;--radius-lg:16px;--fd:'DM Serif Display',serif;--fb:'DM Sans',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:#fff;color:var(--g900);min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:1px solid var(--g200);position:sticky;top:0;background:#fff;z-index:100}
+.nav-logo{font-family:var(--fd);font-size:1.2rem}.nav-logo span{color:var(--red)}
+.nav-tabs{display:flex;gap:4px}
+.nav-tab{padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--g500);transition:all .15s}
+.nav-tab:hover{background:var(--g100);color:var(--g900)}.nav-tab.active{background:var(--g900);color:#fff}
+.page{display:none}.page.active{display:block}
+.hero{text-align:center;padding:4rem 2rem 3rem;border-bottom:1px solid var(--g200)}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);margin-bottom:1rem}
+.hero h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3rem);line-height:1.15;margin-bottom:1rem}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{font-size:15px;color:var(--g500);max-width:480px;margin:0 auto 2rem;line-height:1.7}
+.hero-cats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:2.5rem}
+.cat-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%}
+.btn-start{display:inline-block;padding:12px 32px;background:var(--g900);color:#fff;border-radius:var(--radius);font-size:15px;font-weight:500;cursor:pointer;border:none;transition:background .15s,transform .1s}
+.btn-start:hover{background:#222}.btn-start:active{transform:scale(.98)}
+#form-page{max-width:600px;margin:0 auto;padding:0 1.5rem 4rem}
+.progress-wrap{height:3px;background:var(--g200);position:sticky;top:57px;z-index:50}
+.progress-fill{height:100%;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.form-screen{display:none;padding:2.5rem 0 1.5rem;animation:fadeUp .3s ease;min-height:500px;flex-direction:column}
+.form-screen.active{display:flex}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+.step-dot{width:6px;height:6px;border-radius:50%}
+.q-title{font-family:var(--fd);font-size:1.6rem;line-height:1.3;margin-bottom:.4rem}
+.q-sub{font-size:13px;color:var(--g500);margin-bottom:1.5rem;line-height:1.6}
+.score-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.score-opt{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1px solid var(--g200);border-radius:var(--radius);cursor:pointer;transition:border-color .15s,background .15s;background:#fff}
+.score-opt:hover{background:var(--g50)}
+.score-circle{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;background:var(--g100);color:var(--g700);transition:background .15s,color .15s}
+.score-opt.sel .score-circle{color:#fff}
+.score-content{flex:1}
+.score-lbl{font-size:12px;font-weight:500;color:var(--g500);margin-bottom:2px}
+.score-dsc{font-size:12px;color:#999;line-height:1.45}
+.score-opt.sel .score-dsc{color:var(--g700)}
+.field-group{margin-bottom:1rem}
+.field-group label{display:block;font-size:12px;font-weight:500;color:var(--g500);margin-bottom:5px}
+.field-group input,.field-group textarea{width:100%;padding:10px 13px;font-size:14px;font-family:var(--fb);border:1px solid var(--g200);border-radius:var(--radius);color:var(--g900);background:#fff;transition:border-color .15s}
+.field-group input:focus,.field-group textarea:focus{outline:none}
+.field-group textarea{resize:vertical;min-height:80px}
+.url-banner{background:var(--g50);border:1px solid var(--g200);border-radius:var(--radius);padding:14px 16px;margin-bottom:1.5rem}
+.url-banner-title{font-size:12px;font-weight:500;color:var(--g700);margin-bottom:6px}
+.url-banner-sub{font-size:11px;color:var(--g500);line-height:1.6;margin-bottom:10px}
+.url-connected{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:500}
+.url-dot-live{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.nav-btns{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:1.5rem;border-top:1px solid var(--g200)}
+.btn-back{padding:9px 20px;border:1px solid var(--g200);border-radius:var(--radius);font-size:13px;font-weight:500;background:#fff;color:var(--g700);cursor:pointer;transition:background .15s}
+.btn-back:hover{background:var(--g50)}
+.btn-next{padding:9px 22px;border-radius:var(--radius);font-size:13px;font-weight:500;color:#fff;border:none;cursor:pointer;transition:opacity .15s,transform .1s}
+.btn-next:disabled{opacity:.3;cursor:not-allowed}
+.btn-next:not(:disabled):active{transform:scale(.98)}
+.btn-next:not(:disabled):hover{filter:brightness(.9)}
+.cat-chip-sm{display:inline-block;padding:3px 11px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:.6rem}
+.sum-rows{display:flex;flex-direction:column;gap:7px;margin:1rem 0}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--g50);border-radius:var(--radius);font-size:13px}
+.sum-row.spec{border-radius:0 var(--radius) var(--radius) 0}
+.sum-crit{color:var(--g500);flex:1}
+.sum-score{font-weight:500;color:var(--g700);text-align:right;font-size:12px}
+.sum-total{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:var(--radius);margin-bottom:1rem;font-weight:500;font-size:16px}
+.submit-msg{font-size:13px;padding:10px 14px;border-radius:var(--radius);margin-top:.75rem;text-align:center}
+.submit-ok{background:var(--green-l);color:var(--green-d)}
+.submit-err{background:var(--red-l);color:var(--red-d)}
+.submit-pending{background:var(--g100);color:var(--g500)}
+.action-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.btn-outline{padding:9px 18px;border:1px solid var(--g200);border-radius:var(--radius);font-size:13px;font-weight:500;background:#fff;color:var(--g700);cursor:pointer;transition:background .15s}
+.btn-outline:hover{background:var(--g50)}
+#leaderboard-page{max-width:740px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.lb-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:12px}
+.lb-header h2{font-family:var(--fd);font-size:1.8rem}
+.lb-config{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:.25rem}
+.lb-url-input{padding:8px 12px;font-size:12px;font-family:var(--fb);border:1px solid var(--g200);border-radius:var(--radius);width:280px;color:var(--g900)}
+.lb-url-input:focus{outline:none}
+.btn-sm{padding:7px 14px;border-radius:var(--radius);font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--g200);background:#fff;color:var(--g700);transition:background .15s}
+.btn-sm:hover{background:var(--g100)}
+.btn-sm.primary{background:var(--g900);color:#fff;border-color:var(--g900)}
+.btn-sm.primary:hover{background:#222}
+.lb-meta{font-size:12px;color:var(--g500);margin-bottom:1rem}
+.lb-status{font-size:13px;padding:10px 14px;border-radius:var(--radius);margin-bottom:1rem}
+.cat-section{margin-bottom:2.5rem}
+.cat-section-header{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:var(--radius) var(--radius) 0 0}
+.cat-section-header h3{font-size:14px;font-weight:500}
+.cat-count{font-size:11px;opacity:.7;margin-left:auto}
+.lb-table{width:100%;border-collapse:collapse;font-size:13px}
+.lb-table th{text-align:left;padding:8px 14px;font-size:11px;font-weight:500;color:var(--g500);text-transform:uppercase;letter-spacing:.06em;background:var(--g50);border-bottom:1px solid var(--g200)}
+.lb-table td{padding:10px 14px;border-bottom:1px solid var(--g200);vertical-align:middle}
+.lb-table tr:last-child td{border-bottom:none}
+.lb-table tr.winner td{background:#fffbea}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:500}
+.rank-1{background:#ffd700;color:#7a5800}.rank-2{background:#e0e0e0;color:#555}.rank-3{background:#f4a460;color:#6b3200}.rank-n{background:var(--g100);color:var(--g500);font-size:11px}
+.score-big{font-size:15px;font-weight:500}
+.judge-names{font-size:11px;color:var(--g500)}
+.empty-state{text-align:center;padding:3rem 2rem;color:var(--g500)}
+.lb-table-wrap{border:1px solid var(--g200);border-radius:0 0 var(--radius) var(--radius);overflow:hidden}
+@media(max-width:500px){nav{padding:.75rem 1rem}.hero{padding:2.5rem 1rem 2rem}#leaderboard-page,#form-page{padding-left:1rem;padding-right:1rem}.lb-url-input{width:100%}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-logo">AP<span>AMSA</span> Judging</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('home')">Home</button>
+    <button class="nav-tab" onclick="showPage('form')">Judge</button>
+    <button class="nav-tab" onclick="showPage('leaderboard')">Leaderboard</button>
+  </div>
+</nav>
+
+<div id="home-page" class="page active">
+  <div class="hero">
+    <div class="hero-eyebrow">National APAMSA Research Conference</div>
+    <h1>Poster Judging<br><em>Platform</em></h1>
+    <p>Score research posters across five categories. Results aggregate automatically into a live leaderboard.</p>
+    <div class="hero-cats">
+      <div class="cat-pill" style="background:#FCEBEB;color:#501313"><span class="dot" style="background:#A32D2D"></span>Community Health</div>
+      <div class="cat-pill" style="background:#FAEEDA;color:#412402"><span class="dot" style="background:#BA7517"></span>Wellbeing</div>
+      <div class="cat-pill" style="background:#FAECE7;color:#4A1B0C"><span class="dot" style="background:#C8501A"></span>Clinical &amp; Translational</div>
+      <div class="cat-pill" style="background:#EAF3DE;color:#173404"><span class="dot" style="background:#3B6D11"></span>Basic Science</div>
+      <div class="cat-pill" style="background:#E6F1FB;color:#042C53"><span class="dot" style="background:#185FA5"></span>AANHPI-focused</div>
+    </div>
+    <button class="btn-start" onclick="showPage('form')">Start judging</button>
+  </div>
+  <div style="max-width:600px;margin:3rem auto;padding:0 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px">
+    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">7</div><div style="font-size:12px;color:var(--g500)">Criteria per rubric</div></div>
+    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">100</div><div style="font-size:12px;color:var(--g500)">Points possible</div></div>
+    <div style="padding:1.25rem;border:1px solid var(--g200);border-radius:var(--radius-lg)"><div style="font-size:1.5rem;font-family:var(--fd);margin-bottom:.25rem">5</div><div style="font-size:12px;color:var(--g500)">Categories</div></div>
+  </div>
+</div>
+
+<div id="form-page" class="page">
+  <div class="progress-wrap"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  <div id="form-screens"></div>
+</div>
+
+<div id="leaderboard-page" class="page">
+  <div class="lb-header">
+    <h2>Leaderboard</h2>
+    <div class="lb-config">
+      <input class="lb-url-input" id="lb-url" placeholder="Paste Apps Script URL...">
+      <button class="btn-sm primary" onclick="loadLeaderboard()">Load</button>
+      <button class="btn-sm" onclick="loadLeaderboard()">Refresh</button>
+    </div>
+  </div>
+  <div class="lb-meta" id="lb-meta"></div>
+  <div id="lb-status"></div>
+  <div id="lb-content"><div class="empty-state"><p style="font-weight:500;margin-bottom:.5rem">No data yet</p><p>Paste your Apps Script URL above and click Load.</p></div></div>
+</div>
+
+<script>
+const PALETTE=[{accent:'#A32D2D',light:'#FCEBEB',dark:'#501313',border:'#F09595'},{accent:'#BA7517',light:'#FAEEDA',dark:'#412402',border:'#EF9F27'},{accent:'#C8501A',light:'#FAECE7',dark:'#4A1B0C',border:'#F0997B'},{accent:'#3B6D11',light:'#EAF3DE',dark:'#173404',border:'#97C459'},{accent:'#185FA5',light:'#E6F1FB',dark:'#042C53',border:'#85B7EB'}];
+const CATS=['Community Health, Epidemiology, Education, and Policy','Healthcare Professional and Trainee Wellbeing','Clinical and Translational Research','Basic Science Research','AANHPI-focused Projects'];
+const SHARED=[{name:'Visual Design & Organization',weight:10,descs:{5:'Clear layout; logical flow; professional design; figures and text balanced',4:'Well-organized with minor inconsistencies; easy to follow',3:'Adequate organization; some cluttered or unclear sections',2:'Difficult to follow; inconsistent formatting; figures poorly integrated',1:'Disorganized; text-heavy or unreadable; no clear visual hierarchy'}},{name:'Clarity of Objectives / Aims',weight:15,descs:{5:'Research question precise; significance and knowledge gap clearly articulated',4:'Aims clear with minor ambiguity; significance noted',3:'Aims present but vague or partially unclear',2:'Aims difficult to identify; significance not addressed',1:'No clear aims or research question stated'}},{name:'Methods / Approach',weight:20,descs:{5:'Methods rigorous, appropriate, fully described; limitations acknowledged',4:'Methods sound with minor gaps in description or justification',3:'Methods partially described; some choices not well justified',2:'Methods poorly described or inappropriate for stated aims',1:'Methods absent, incomprehensible, or fundamentally flawed'}},{name:'Results / Findings',weight:20,descs:{5:'Results clearly presented; data well-visualized; findings address aims',4:'Results adequate; mostly clear visualizations',3:'Some results shown but incomplete or hard to interpret',2:'Results sparse, misleading, or poorly visualized',1:'No meaningful results presented'}},{name:'Conclusions & Implications',weight:15,descs:{5:'Conclusions supported by data; future directions and impact discussed',4:'Conclusions appropriate; limited future directions or impact discussion',3:'Conclusions somewhat supported; overstated or incomplete',2:'Conclusions unsupported or missing; no implications discussed',1:'No conclusions drawn; or conclusions entirely unsupported'}},{name:'Presenter Knowledge & Engagement',weight:15,descs:{5:'Deep understanding; answers questions confidently; enthusiastic',4:'Good knowledge; handles most questions well; generally engaging',3:'Basic understanding; struggles with some questions; moderate engagement',2:'Limited knowledge beyond the poster; difficulty answering questions',1:'Unable to explain or defend the work presented'}}];
+const SPECIFIC=[{name:'Community Relevance & Impact',weight:20,descs:{5:'Strong community need; robust stakeholder engagement; clear policy implications',4:'Community relevance evident; some stakeholder involvement; reasonable implications',3:'Community context present but superficial; limited discussion of impact',2:'Community relevance unclear; minimal stakeholder engagement',1:'No community context or public health relevance articulated'}},{name:'Relevance to Wellbeing & Workforce',weight:20,descs:{5:'Addresses documented wellbeing gap; actionable; training implications concrete',4:'Wellbeing focus clear; actionable elements present with minor gaps',3:'Wellbeing topic addressed but intervention underdeveloped',2:'Tenuous link to wellbeing; limited applicability to trainees',1:'No meaningful connection to healthcare professional/trainee wellbeing'}},{name:'Translational Significance',weight:20,descs:{5:'Clear bench-to-bedside pathway; clinical applicability articulated; feasibility discussed',4:'Translational potential evident; some discussion of clinical relevance',3:'Translational link implied but not explicitly developed',2:'Clinical application unclear or speculative without support',1:'No translational relevance or clinical application addressed'}},{name:'Scientific Rigor & Innovation',weight:20,descs:{5:'Hypothesis well-grounded; controls robust; novel contribution clearly stated',4:'Solid hypothesis and controls; novelty noted but not fully developed',3:'Hypothesis present; some controls; novelty unclear',2:'Weak hypothesis or insufficient controls; limited scientific contribution',1:'No clear hypothesis; no controls; no evident contribution to the field'}},{name:'AANHPI Community Focus & Cultural Relevance',weight:20,descs:{5:'Addresses AANHPI disparities; culturally informed; disaggregated data; community voice',4:'AANHPI focus clear; culturally relevant; minor gaps in disaggregation or engagement',3:'AANHPI population included but not central; limited cultural contextualization',2:'AANHPI mentioned superficially; no meaningful disparity framing',1:'No meaningful AANHPI relevance despite category submission'}}];
+const LABELS={5:'Excellent',4:'Good',3:'Satisfactory',2:'Needs improvement',1:'Inadequate'};
+
+let sheetsUrl=localStorage.getItem('apamsa_url')||'';
+let state={catIdx:0,info:{judge:'',poster:'',presenter:''},scores:{},notes:{}};
+let steps=[],cur=0;
+
+function showPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById(p+'-page').classList.add('active');
+  const tabs=document.querySelectorAll('.nav-tab');
+  if(p==='home')tabs[0].classList.add('active');
+  if(p==='form'){tabs[1].classList.add('active');renderForm();}
+  if(p==='leaderboard'){tabs[2].classList.add('active');initLeaderboard();}
+}
+function pal(i){return PALETTE[i!==undefined?i:state.catIdx];}
+function buildSteps(ci){const criteria=[...SHARED,{...SPECIFIC[ci],isSpecific:true}];steps=[{type:'setup'},{type:'cat'},{type:'info'},...criteria.map((c,i)=>({type:'score',crit:c,idx:i})),{type:'notes'},{type:'summary'}];cur=0;}
+function gk(ci,cri){return ci+'_'+cri;}
+function total(ci){return Math.round([...SHARED,SPECIFIC[ci]].reduce((t,c,i)=>{const s=state.scores[gk(ci,i)];return t+(s?(s/5)*c.weight:0);},0)*10)/10;}
+
+function applyTheme(){
+  const p=pal();
+  document.getElementById('progress-fill').style.background=p.accent;
+  let s=document.getElementById('theme-dyn');
+  if(!s){s=document.createElement('style');s.id='theme-dyn';document.head.appendChild(s);}
+  s.textContent=`.step-lbl{color:${p.accent}}.score-opt:hover{border-color:${p.border}}.score-opt.sel{border-color:${p.accent};background:${p.light}}.score-opt.sel .score-circle{background:${p.accent};color:#fff}.score-opt.sel .score-lbl{color:${p.dark}}.field-group input:focus,.field-group textarea:focus{border-color:${p.accent}}.btn-next-t{background:${p.accent}}.btn-next-t:hover{background:${p.dark}}`;
+}
+
+function nbtn(label,disabled){return `<button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="next-btn"${disabled?' disabled style="opacity:.3;cursor:not-allowed"':''}>${label}</button>`;}
+
+function renderForm(){
+  if(!steps.length)buildSteps(0);
+  applyTheme();
+  const p=pal();
+  document.getElementById('progress-fill').style.width=Math.round((cur/(steps.length-1))*100)+'%';
+  const c=document.getElementById('form-screens');c.innerHTML='';
+  const s=steps[cur];
+  const screen=document.createElement('div');
+  screen.className='form-screen active';
+  screen.style.cssText='max-width:560px;margin:0 auto;padding:2rem 0 2rem';
+
+  if(s.type==='setup'){
+    const isSet=sheetsUrl.startsWith('https://');
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Setup</span></div><div class="q-title">Connect your Google Sheet</div><div class="q-sub">Paste your Apps Script web app URL to log every submission automatically. Saved in your browser — only needed once.</div><div class="url-banner"><div class="url-banner-title">Apps Script web app URL</div><div class="url-banner-sub">In Google Sheets: Extensions → Apps Script → Deploy → New deployment → Web app → Anyone → Deploy → copy URL</div><div class="field-group" style="margin-bottom:8px"><input id="url-input" placeholder="https://script.google.com/macros/s/.../exec" value="${sheetsUrl}" style="font-size:12px"></div>${isSet?'<div class="url-connected"><span class="url-dot-live"></span>URL saved and ready</div>':''}</div><div style="display:flex;gap:8px"><button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="save-url">Save & continue</button><button class="btn-outline" id="skip-url">Skip (no sheet)</button></div>`;
+    screen.querySelector('#save-url').onclick=()=>{const v=document.getElementById('url-input').value.trim();if(v.startsWith('https://')){sheetsUrl=v;localStorage.setItem('apamsa_url',v);}cur++;renderForm();};
+    screen.querySelector('#skip-url').onclick=()=>{cur++;renderForm();};
+
+  }else if(s.type==='cat'){
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Category</span></div><div class="q-title">Which category?</div><div class="q-sub">Select the poster's submission category.</div><div class="score-list">${CATS.map((cat,i)=>{const cp=pal(i);const sel=state.catIdx===i;return`<div class="score-opt${sel?' sel':''}" data-cat="${i}" style="${sel?`border-color:${cp.accent};background:${cp.light}`:''}"><div class="score-circle" style="${sel?`background:${cp.accent};color:#fff`:''}"> ${i+1}</div><div class="score-content" style="display:flex;align-items:center;gap:8px"><span style="width:7px;height:7px;border-radius:50%;background:${cp.accent};flex-shrink:0;display:inline-block"></span><span style="font-size:13px">${cat}</span></div></div>`;}).join('')}</div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Continue',false)}</div>`;
+    screen.querySelectorAll('[data-cat]').forEach(el=>{el.onclick=()=>{state.catIdx=parseInt(el.dataset.cat);buildSteps(state.catIdx);cur=1;renderForm();};});
+
+  }else if(s.type==='info'){
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Details</span></div><div class="q-title">Judge & poster info</div><div class="q-sub">Appears in the leaderboard alongside scores.</div><div class="field-group"><label>Your name</label><input id="f-judge" placeholder="e.g. Dr. Sarah Kim" value="${state.info.judge}"></div><div class="field-group"><label>Poster number</label><input id="f-poster" placeholder="e.g. 042" value="${state.info.poster}"></div><div class="field-group"><label>Presenter name</label><input id="f-presenter" placeholder="e.g. Alex Chen" value="${state.info.presenter}"></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Start scoring',false)}</div>`;
+
+  }else if(s.type==='score'){
+    const{crit,idx}=s;const key=gk(state.catIdx,idx);const sel=state.scores[key];const note=state.notes[key]||'';const isSpec=!!crit.isSpecific;
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">${isSpec?'Category criterion':`Criterion ${idx+1} of ${SHARED.length}`}</span></div>${isSpec?`<div class="cat-chip-sm" style="background:${p.light};color:${p.dark}">${CATS[state.catIdx]}</div>`:''}<div class="q-title">${crit.name}</div><div class="q-sub">Weight: <strong>${crit.weight}%</strong> of total score</div><div class="score-list">${[5,4,3,2,1].map(n=>`<div class="score-opt${sel===n?' sel':''}" data-score="${n}"><div class="score-circle">${n}</div><div class="score-content"><div class="score-lbl">${LABELS[n]}</div><div class="score-dsc">${crit.descs[n]}</div></div></div>`).join('')}</div><div class="field-group"><label>Notes (optional)</label><textarea id="crit-note" placeholder="Any specific observations...">${note}</textarea></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Next',!sel)}</div>`;
+    screen.querySelectorAll('[data-score]').forEach(el=>{el.onclick=()=>{state.scores[key]=parseInt(el.dataset.score);renderForm();};});
+
+  }else if(s.type==='notes'){
+    const ok='ov_'+state.catIdx;
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Comments</span></div><div class="q-title">Overall feedback</div><div class="q-sub">Optional — shared with the presenter after the conference.</div><div class="field-group"><label>Strengths</label><textarea id="ov-s" placeholder="What did this poster do particularly well?">${state.notes[ok+'s']||''}</textarea></div><div class="field-group"><label>Areas for improvement</label><textarea id="ov-i" placeholder="What could be strengthened?">${state.notes[ok+'i']||''}</textarea></div><div class="nav-btns"><button class="btn-back" id="back-btn">Back</button>${nbtn('Review & submit',false)}</div>`;
+
+  }else if(s.type==='summary'){
+    const ci=state.catIdx;const criteria=[...SHARED,SPECIFIC[ci]];const tot=total(ci);const ok='ov_'+ci;const str=state.notes[ok+'s']||'';const imp=state.notes[ok+'i']||'';const hasUrl=sheetsUrl.startsWith('https://');
+    screen.innerHTML=`<div class="step-badge"><span class="step-dot" style="background:${p.accent}"></span><span class="step-lbl">Summary</span></div><div class="q-title">Rubric complete</div><div class="q-sub"><strong>${CATS[ci]}</strong><br>Poster #${state.info.poster||'—'} · ${state.info.presenter||'—'} · Judge: ${state.info.judge||'—'}</div><div class="sum-rows">${criteria.map((c,i)=>{const sc=state.scores[gk(ci,i)];const wtd=sc?((sc/5)*c.weight).toFixed(1):'—';const isSpec=i===SHARED.length;return`<div class="sum-row${isSpec?' spec':''}"${isSpec?` style="border-left:2px solid ${p.accent};"`:''}><span class="sum-crit">${c.name}</span><span class="sum-score">${sc?LABELS[sc]+' ('+sc+'/5)':'—'} &nbsp;<strong style="color:${p.accent}">${wtd}/${c.weight}</strong></span></div>`;}).join('')}</div><div class="sum-total" style="background:${p.light};border:1px solid ${p.border}"><span>Total score</span><span style="color:${p.accent};font-size:18px;font-family:var(--fd)">${tot} / 100</span></div>${str||imp?`<div style="font-size:13px;color:var(--g500);line-height:1.6;margin-bottom:.5rem">${str?`<strong style="color:var(--g700)">Strengths:</strong> ${str}<br>`:''}${imp?`<strong style="color:var(--g700)">Improvements:</strong> ${imp}`:''}</div>`:''}<div id="sub-msg"></div><div class="action-btns">${hasUrl?`<button class="btn-next btn-next-t" style="color:#fff;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:500;cursor:pointer" id="submit-btn">Submit to leaderboard</button>`:''}<button class="btn-outline" id="copy-btn">Copy summary</button><button class="btn-outline" id="new-btn">Score another</button></div><div class="nav-btns" style="border:none;padding-top:.75rem"><button class="btn-back" id="back-btn">Back</button><span></span></div>`;
+    if(hasUrl){screen.querySelector('#submit-btn').onclick=async function(){const btn=this;const msg=screen.querySelector('#sub-msg');btn.disabled=true;btn.style.opacity='.5';msg.className='submit-msg submit-pending';msg.textContent='Sending...';try{await fetch(sheetsUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({judge:state.info.judge,poster:state.info.poster,presenter:state.info.presenter,category:CATS[ci],s0:state.scores[gk(ci,0)],s1:state.scores[gk(ci,1)],s2:state.scores[gk(ci,2)],s3:state.scores[gk(ci,3)],s4:state.scores[gk(ci,4)],s5:state.scores[gk(ci,5)],s6:state.scores[gk(ci,6)],total:tot,strengths:str,improvements:imp})});msg.className='submit-msg submit-ok';msg.textContent='Submitted — score recorded in the leaderboard.';btn.textContent='Submitted';}catch(e){msg.className='submit-msg submit-err';msg.textContent='Could not reach the sheet. Use Copy summary as backup.';btn.disabled=false;btn.style.opacity='1';btn.textContent='Retry';}};}
+    screen.querySelector('#copy-btn').onclick=()=>{const lines=[`APAMSA Poster Judging Rubric`,`Category: ${CATS[ci]}`,`Poster #: ${state.info.poster} | Presenter: ${state.info.presenter} | Judge: ${state.info.judge}`,``,...criteria.map((c,i)=>{const sc=state.scores[gk(ci,i)]||'N/A';const w=sc!=='N/A'?((sc/5)*c.weight).toFixed(1):'—';return`${c.name} (${c.weight}%): ${sc}/5 = ${w} pts`;}),``,`TOTAL: ${tot} / 100`,str?`\nStrengths: ${str}`:'',imp?`Areas for improvement: ${imp}`:''  ].filter(Boolean).join('\n');navigator.clipboard.writeText(lines).then(()=>{const b=screen.querySelector('#copy-btn');b.textContent='Copied!';setTimeout(()=>{b.textContent='Copy summary';},2000);});};
+    screen.querySelector('#new-btn').onclick=()=>{state.scores={};state.notes={};state.info={judge:state.info.judge,poster:'',presenter:''};buildSteps(state.catIdx);cur=1;renderForm();};
+  }
+
+  const nb=screen.querySelector('#next-btn');const bb=screen.querySelector('#back-btn');
+  if(nb)nb.onclick=()=>{if(s.type==='info'){state.info.judge=document.getElementById('f-judge').value;state.info.poster=document.getElementById('f-poster').value;state.info.presenter=document.getElementById('f-presenter').value;}if(s.type==='notes'){const ok='ov_'+state.catIdx;state.notes[ok+'s']=document.getElementById('ov-s').value;state.notes[ok+'i']=document.getElementById('ov-i').value;}if(s.type==='score'){const el=document.getElementById('crit-note');if(el)state.notes[gk(state.catIdx,s.idx)]=el.value;}cur++;renderForm();};
+  if(bb)bb.onclick=()=>{if(s.type==='notes'){const ok='ov_'+state.catIdx;const sv=document.getElementById('ov-s');const iv=document.getElementById('ov-i');if(sv)state.notes[ok+'s']=sv.value;if(iv)state.notes[ok+'i']=iv.value;}cur--;renderForm();};
+  c.appendChild(screen);
+}
+
+function initLeaderboard(){
+  const saved=localStorage.getItem('apamsa_url')||'';
+  if(saved)document.getElementById('lb-url').value=saved;
+}
+
+async function loadLeaderboard(){
+  const url=document.getElementById('lb-url').value.trim();
+  if(!url.startsWith('https://')){document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#FCEBEB;color:#501313">Please enter a valid Apps Script URL.</div>`;return;}
+  localStorage.setItem('apamsa_url',url);sheetsUrl=url;
+  document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#f0f0f0;color:#888">Loading results...</div>`;
+  try{
+    const resp=await fetch(url+'?action=leaderboard');
+    const data=await resp.json();
+    renderLeaderboard(data);
+    document.getElementById('lb-meta').textContent=`Last refreshed: ${new Date().toLocaleTimeString()} · ${data.total||0} submission${data.total!==1?'s':''} total`;
+    document.getElementById('lb-status').innerHTML='';
+  }catch(e){document.getElementById('lb-status').innerHTML=`<div class="lb-status" style="background:#FCEBEB;color:#501313">Could not load data. Check the URL and make sure the script is deployed with "Anyone" access.</div>`;}
+}
+
+function renderLeaderboard(data){
+  const content=document.getElementById('lb-content');
+  if(!data.categories||!Object.keys(data.categories).length){content.innerHTML=`<div class="empty-state"><p style="font-weight:500;margin-bottom:.5rem">No submissions yet</p><p>Scores will appear here as judges submit.</p></div>`;return;}
+  content.innerHTML=CATS.map((cat,ci)=>{
+    const p=PALETTE[ci];const entries=(data.categories[cat]||[]).sort((a,b)=>b.avg-a.avg);
+    if(!entries.length)return'';
+    return`<div class="cat-section"><div class="cat-section-header" style="background:${p.light}"><span style="width:10px;height:10px;border-radius:50%;background:${p.accent};flex-shrink:0;display:inline-block"></span><h3 style="color:${p.dark}">${cat}</h3><span class="cat-count" style="color:${p.dark}">${entries.length} poster${entries.length!==1?'s':''}</span></div><div class="lb-table-wrap"><table class="lb-table"><thead><tr><th>Rank</th><th>Poster</th><th>Presenter</th><th>Avg score</th><th>Judges</th></tr></thead><tbody>${entries.map((e,i)=>`<tr${i===0?' class="winner"':''}><td><span class="rank-badge ${i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-n'}">${i===0?'1st':i===1?'2nd':i===2?'3rd':(i+1)+'th'}</span></td><td><strong>#${e.poster}</strong></td><td>${e.presenter}</td><td><span class="score-big" style="color:${p.accent}">${(+e.avg).toFixed(1)}</span><span style="color:#999;font-size:12px"> /100</span></td><td><div class="judge-names">${e.judges.join(', ')}</div></td></tr>`).join('')}</tbody></table></div></div>`;
+  }).join('');
+}
+
+buildSteps(0);
+</script>
+</body>
+</html>
